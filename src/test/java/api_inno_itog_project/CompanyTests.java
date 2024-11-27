@@ -25,6 +25,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Epic("Тесты на модуль Company")
+@DisplayName("Тесты на модуль Company")
 @Owner("Smirnova G.")
 public class CompanyTests {
 

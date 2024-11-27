@@ -20,7 +20,6 @@ import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import java.sql.SQLException;
-import jdk.jfr.Description;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +28,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Контрактные тесты на модуль Employee")
+@DisplayName("Контрактные тесты на модуль Employee")
 @Owner("Smirnova G.")
 public class EmployeeContractTest {
 
@@ -67,8 +67,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Получаем список работников по существующей компании")
-    @Tag("")
-    @Story("")
+    @Story("Список сотрудников")
     @Severity(SeverityLevel.BLOCKER)
     public void getListEmployeeByCompany() throws SQLException {
         int id = databaseService.getAnyCompanyID();
@@ -84,7 +83,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Ожидаем пустое тело по запросу списка работников по НЕ существующему id компании")
-    @Story("")
+    @Story("Получение информации о менеджерах")
     @Severity(SeverityLevel.BLOCKER)
     public void getBodyEmployeeByCompany() throws SQLException {
         int id = databaseService.getLastCompanyID();
@@ -101,7 +100,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Ожидаем статус 200,при запросе сотрудника по его id")
-    @Story("")
+    @Story("Список сотрудников")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeeById() throws SQLException {
         int id = databaseService.getAnyEmployeeId();
@@ -118,7 +117,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Ожидаем статус 200 и Content-length=0, при получение сотрудника с несуществующем id")
-    @Story("")
+    @Story("Список сотрудников")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeerByInvalidId() throws SQLException {
 
@@ -134,8 +133,8 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @DisplayName("Проверяем, что не  можем создать сотрудника без токеном, status-401")
-    @Story("")
+    @DisplayName("Проверяем, что не  можем создать сотрудника без токена, status-401")
+    @Story("Список сотрудников")
     @Severity(SeverityLevel.BLOCKER)
     public void iCannotAddNewEmployee() {
         Faker faker = new Faker();
@@ -153,7 +152,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Проверяем что можем создать сотрудника c токеном")
-    @Story("")
+    @Story("Список сотрудников")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanAddNewEmployee() {
 
@@ -174,7 +173,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Проверяем, что можем изменить информацию о сотруднике")
-    @Story("")
+    @Story("Редактирование информации о сотрудниках")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanEditEmployee() {
         AuthResponse info = employeeApiHelper.auth(username, password);
@@ -193,7 +192,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Проверяем, что при отправке запросы на изменение несуществующего сотрудника получаем 500")
-    @Story("")
+    @Story("Редактирование информации о сотрудниках")
     @Severity(SeverityLevel.BLOCKER)
     public void iCannotEditEmployee() {
         AuthResponse info = employeeApiHelper.auth(username, password);
@@ -213,7 +212,7 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Получение списка сотрудников для компании")
-    @Story("")
+    @Story("Список сотрудников")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeeCompany() {
         employeeApiHelper.printGetEmployeeIsCompany(companyId);
