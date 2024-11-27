@@ -1,6 +1,6 @@
 package ui_inno_itog_project.page_object.pom.pages;
 
-import ui_inno_itog_project.helper.ConfProperties;
+import helper.ConfProperties;
 import ui_inno_itog_project.page_object.pom.elements.CheckoutYourInformation;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;

@@ -14,11 +14,11 @@ public class Card {
         "//div[@class=\"inventory_item_name \"][text()='Sauce Labs Bolt T-Shirt']");
     private final By card3Location = By.xpath(
         "//div[@class=\"inventory_item_name \"][text()='Sauce Labs Onesie']");
-    private final By submitButtonCard1Location = By.xpath(
+    private final By clickButtonCard1Location = By.xpath(
         "//*[@id=\"add-to-cart-sauce-labs-backpack\"]");
-    private final By submitButtonCard2Location = By.xpath(
+    private final By clickButtonCard2Location = By.xpath(
         "//*[@id=\"add-to-cart-sauce-labs-bolt-t-shirt\"]");
-    private final By submitButtonCard3Location = By.xpath(
+    private final By clickButtonCard3Location = By.xpath(
         "//*[@id=\"add-to-cart-sauce-labs-onesie\"]");
     private final By shoppingCartLocation = By.xpath(
         "//span[@class=\"shopping_cart_badge\"][text()='3']");
@@ -49,22 +49,22 @@ public class Card {
     }
 
     @Step("Добавление в корзину товара №1")
-    public void submitButtonCard1Button() {
-        driver.findElement(submitButtonCard1Location).click();
+    public void clickButtonCard1Button() {
+        driver.findElement(clickButtonCard1Location).click();
     }
 
     @Step("Добавление в корзину товара №2")
-    public void submitButtonCard2Button() {
-        driver.findElement(submitButtonCard2Location).click();
+    public void clickButtonCard2Button() {
+        driver.findElement(clickButtonCard2Location).click();
     }
 
     @Step("Добавление в корзину товара №3")
-    public void submitButtonCard3Button() {
-        driver.findElement(submitButtonCard3Location).click();
+    public void clickButtonCard3Button() {
+        driver.findElement(clickButtonCard3Location).click();
     }
 
     @Step("Переход на страницу корзины по иконке Корзина")
-    public void shoppingCartButton() {
+    public void clickShoppingCartButton() {
         driver.findElement(shoppingCartLocation).click();
     }
 }

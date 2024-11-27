@@ -13,7 +13,7 @@ public class OrderCart {
     private final By nameCart3Location = By.xpath(
         "//div[@class='cart_item_label']//a//div[text()='Sauce Labs Onesie']");
     private final By totalPriceLocation = By.xpath("//div[@class='summary_total_label']");
-    private final By buttonCheckoutLocation = By.xpath("//button[@id=\"finish\"]");
+    private final By clickButtonCheckoutLocation = By.xpath("//button[@id=\"finish\"]");
     private final By finishHeaderLocation = By.xpath("//h2");
     private final WebDriver driver;
 
@@ -43,7 +43,7 @@ public class OrderCart {
 
     @Step("Нажимаем кнопку")
     public void clickButtonCheckoutLocation() {
-        driver.findElement(buttonCheckoutLocation).click();
+        driver.findElement(clickButtonCheckoutLocation).click();
     }
 
     @Step("Получаем текст страницы в завершении оформления заказа")

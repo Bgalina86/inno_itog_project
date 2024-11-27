@@ -35,22 +35,22 @@ public class CardsPage {
     }
 
     @Step("Добавление товара Sauce Labs Backpack в корзину")
-    public void submitButtonCard1Button() {
-        card.submitButtonCard1Button();
+    public void clickButtonCard1Button() {
+        card.clickButtonCard1Button();
     }
 
     @Step("Добавление товара Sauce Labs Bolt T-Shirt в корзину")
-    public void submitButtonCard2Button() {
-        card.submitButtonCard2Button();
+    public void clickButtonCard2Button() {
+        card.clickButtonCard2Button();
     }
 
     @Step("Добавление товара Sauce Labs Onesie в корзину")
-    public void submitButtonCard3Button() {
-        card.submitButtonCard3Button();
+    public void clickButtonCard3Button() {
+        card.clickButtonCard3Button();
     }
 
     @Step("По иконке корзина переходим в корзину")
-    public void shoppingCartButton() {
-        card.shoppingCartButton();
+    public void clickShoppingCartButton() {
+        card.clickShoppingCartButton();
     }
 }

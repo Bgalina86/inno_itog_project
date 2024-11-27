@@ -1,5 +1,5 @@
 package ui_inno_itog_project;
-import ui_inno_itog_project.helper.ConfProperties;
+import helper.ConfProperties;
 import ui_inno_itog_project.page_object.pom.pages.AuthorizationPage;
 import ui_inno_itog_project.page_object.pom.pages.CardsPage;
 import ui_inno_itog_project.page_object.pom.pages.CheckoutOverviewPage;
@@ -14,10 +14,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+
 public class BaseTest {
     protected WebDriver driver;
-
-    // pages
     protected AuthorizationPage authorizationPage;
     protected CardsPage cardsPage;
     protected CheckoutOverviewPage checkoutOverviewPage;

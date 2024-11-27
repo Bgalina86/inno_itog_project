@@ -1,6 +1,6 @@
 package api_inno_itog_project.constClass;
 
-public class Const {
+public class ConstStatusCode {
 
     public static final int HTTP_CODE_OK = 200;
     public static final int HTTP_CODE_CREATE = 201;

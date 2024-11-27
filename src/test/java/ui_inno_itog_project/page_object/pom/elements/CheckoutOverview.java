@@ -63,8 +63,9 @@ public class CheckoutOverview {
     }
 
     @Step("Нажатия кнопки оформления заказа")
-    public void buttonFinishLocation() {
+    public void clickButtonFinishLocation() {
         driver.findElement(buttonFinishLocation).click();
     }
 
 }
+

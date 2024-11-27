@@ -12,7 +12,7 @@ public class CheckoutYourInformation {
         "//div[@class='form_group']//*[@id='last-name']");//Galina
     private final By postalCodeLocation = By.xpath(
         "//div[@class='form_group']//*[@id='postal-code']");//124578
-    private final By continueLocation = By.xpath("//input[@id='continue']");
+    private final By clickContinueLocation = By.xpath("//input[@id='continue']");
     private final WebDriver driver;
 
     public CheckoutYourInformation(WebDriver driver) {
@@ -24,6 +24,6 @@ public class CheckoutYourInformation {
         driver.findElement(firstNameLocation).sendKeys(firstName);
         driver.findElement(lastNameLocation).sendKeys(lastName);
         driver.findElement(postalCodeLocation).sendKeys(postalCode);
-        driver.findElement(continueLocation).submit();
+        driver.findElement(clickContinueLocation).click();
     }
 }

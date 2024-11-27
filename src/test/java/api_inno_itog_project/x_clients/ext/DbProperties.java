@@ -1,4 +1,4 @@
-package inno_x_clients.x_clients.ext;
+package api_inno_itog_project.x_clients.ext;
 
 import java.io.FileInputStream;
 import java.io.IOException;

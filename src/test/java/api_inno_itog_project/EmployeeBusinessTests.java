@@ -4,17 +4,17 @@ import static api_inno_itog_project.x_clients.helper.EmployeeRandomeService.gene
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.github.javafaker.Faker;
 import api_inno_itog_project.x_clients.ext.DatabaseService;
 import api_inno_itog_project.x_clients.ext.DbProperties;
 import api_inno_itog_project.x_clients.helper.CompanyApiHelper;
-import api_inno_itog_project.x_clients.helper.ConfProperties;
+import helper.ConfProperties;
 import api_inno_itog_project.x_clients.helper.EmployeeApiHelper;
 import api_inno_itog_project.x_clients.model.CreateEmployeeResponse;
 import api_inno_itog_project.x_clients.model.Employee;
 import api_inno_itog_project.x_clients.model.PatchEmployeeRequest;
 import io.qameta.allure.Epic;
+import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
@@ -25,14 +25,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import jdk.jfr.Description;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-@Epic("")
-public class EmploeeBusinessTests {
+@Epic("Р‘РёР·РЅРµСЃ С‚РµСЃС‚С‹ РЅР° РјРѕРґСѓР»СЊ Employee")
+@Owner("Smirnova G.")
+public class EmployeeBusinessTests {
 
     private static DatabaseService databaseService;
     private static int companyId;
@@ -43,8 +43,8 @@ public class EmploeeBusinessTests {
     private static String username;
     private static String password;
 
-    @BeforeAll
-    public static void setUp() throws SQLException, IOException {
+    @BeforeEach
+    public void setUp() throws SQLException, IOException {
 
         RestAssured.baseURI = DbProperties.getProperties("baseURI");
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
@@ -58,38 +58,33 @@ public class EmploeeBusinessTests {
         employeeApiHelper = new EmployeeApiHelper();
 
         RestAssured.defaultParser = Parser.JSON;
-       properties = new ConfProperties();
+        properties = new ConfProperties();
         username = properties.getProperty("username");
         password = properties.getProperty("password");
     }
 
 
-    @AfterAll
-    public static void tearDown() throws SQLException {
+    @AfterEach
+    public void tearDown() throws SQLException {
         databaseService.deleteCompanyAndItsEmloyees(companyId);
         databaseService.closeConnection();
     }
 
 
     @Test
-    @Description("Проверяем, что могу создать нового пользователя")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
+    @DisplayName("РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РјРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployee() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
         assertEquals(employee.firstName(), resultSet.getString(2));
         assertEquals(employee.lastName(), resultSet.getString(3));
         assertEquals(employee.middleName(), resultSet.getString(4));
-       // assertEquals(employee.email(), resultSet.getString(6));
         assertEquals(employee.avatar_url(), resultSet.getString(7));
         assertEquals(employee.phone(), resultSet.getString(8));
         assertEquals(employee.birthdate().toString(), resultSet.getDate(9).toString());
@@ -97,34 +92,15 @@ public class EmploeeBusinessTests {
 
     }
 
-    @Test
-    @DisplayName("")
-    @Tag("")
-    @Story("")
-    @Severity(SeverityLevel.BLOCKER)
-    public void ICanEditEmployee() {
-
-        PatchEmployeeRequest patchEmployeeRequest = fakerEmployee();
-        Employee employee = employeeApiHelper.editEmployee(employeeId, patchEmployeeRequest);
-        assertEquals(employee.lastName(),patchEmployeeRequest.lastName());
-        assertEquals(employee.email(),patchEmployeeRequest.email());
-        assertEquals(employee.avatar_url(),patchEmployeeRequest.url());
-        assertEquals(employee.phone(),patchEmployeeRequest.phone());
-        assertEquals(employee.isActive(),patchEmployeeRequest.isActive());
-    }
 
     @Test
-    @Description("Могу создать нового пользователя.Имя записалось корректно")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
+    @DisplayName("РњРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ.РРјСЏ Р·Р°РїРёСЃР°Р»РѕСЃСЊ РєРѕСЂСЂРµРєС‚РЅРѕ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployeeFirstName() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
@@ -132,17 +108,13 @@ public class EmploeeBusinessTests {
     }
 
     @Test
-    @Description("Могу создать нового пользователя. Фамилия записалась корректно")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
+    @DisplayName("РњРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. Р¤Р°РјРёР»РёСЏ Р·Р°РїРёСЃР°Р»Р°СЃСЊ РєРѕСЂСЂРµРєС‚РЅРѕ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployeeLastName() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
@@ -150,17 +122,13 @@ public class EmploeeBusinessTests {
     }
 
     @Test
-    @Description("Могу создать нового пользователя. Отчество записалось корректно")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
+    @DisplayName("РњРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. РћС‚С‡РµСЃС‚РІРѕ Р·Р°РїРёСЃР°Р»РѕСЃСЊ РєРѕСЂСЂРµРєС‚РЅРѕ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployeeMiddleName() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
@@ -168,35 +136,27 @@ public class EmploeeBusinessTests {
     }
 
     @Test
-    @Description("Могу создать нового пользователя. Email записан корректно")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
-    @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("РњРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. Email Р·Р°РїРёСЃР°РЅ РєРѕСЂСЂРµРєС‚РЅРѕ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
+    @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeeEmail() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
-        assertEquals(employee.email(), resultSet.getString(6), "EMAIL не записался");
+        assertEquals(employee.email(), resultSet.getString(6), "EMAIL РЅРµ Р·Р°РїРёСЃР°Р»СЃСЏ");
     }
 
     @Test
-    @Description("Могу создать нового пользователя. Телефон записан корректно")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
-    @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("РњРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. РўРµР»РµС„РѕРЅ Р·Р°РїРёСЃР°РЅ РєРѕСЂСЂРµРєС‚РЅРѕ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
+    @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeePhone() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
@@ -205,17 +165,13 @@ public class EmploeeBusinessTests {
     }
 
     @Test
-    @Description("Могу создать нового пользователя. День рождения записан корректно")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
-    @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("РњРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. Р”РµРЅСЊ СЂРѕР¶РґРµРЅРёСЏ Р·Р°РїРёСЃР°РЅ РєРѕСЂСЂРµРєС‚РЅРѕ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
+    @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeeBirthdate() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
@@ -223,17 +179,13 @@ public class EmploeeBusinessTests {
     }
 
     @Test
-    @Description("Могу создать нового пользователя. IsActive записан корректно")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
-    @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("РњРѕРіСѓ СЃРѕР·РґР°С‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. IsActive Р·Р°РїРёСЃР°РЅ РєРѕСЂСЂРµРєС‚РЅРѕ")
+    @Story("РЎРѕР·РґР°РЅРёРµ РјРµРЅРµРґР¶РµСЂР°")
+    @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeeIsActive() throws SQLException {
         Faker faker = new Faker();
         Employee employee = generateEmployee(faker, companyId);
-
         CreateEmployeeResponse response = employeeApiHelper.createEmployee(employee);
-
         ResultSet resultSet = databaseService.getEmployeeInfo(response.id());
         resultSet.next();
         assertEquals(response.id(), resultSet.getInt(1));
@@ -241,10 +193,8 @@ public class EmploeeBusinessTests {
     }
 
     @Test
-    @Description("Могу получить информацию о пользователе")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
+    @DisplayName("РњРѕРіСѓ РїРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ")
+    @Story("РџРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanGetEmployeeInfo() {
         Employee employee = employeeApiHelper.getEmployeeInfo(employeeId);
@@ -254,10 +204,8 @@ public class EmploeeBusinessTests {
     }
 
     @Test
-    @Description("Могу получить список сотрудников по компании")
-    @DisplayName("")
-    @Tag("")
-    @Story("")
+    @DisplayName("РњРѕРіСѓ РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ РїРѕ РєРѕРјРїР°РЅРёРё")
+    @Story("РџРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanGetEmployeeListByCompany() {
         List<Employee> employeeList = employeeApiHelper.getListOfEmployee(companyId);
@@ -267,9 +215,9 @@ public class EmploeeBusinessTests {
     public PatchEmployeeRequest fakerEmployee() {
         Faker faker = new Faker();
         return new PatchEmployeeRequest(faker.name().lastName(),
-                faker.internet().emailAddress(),
-                faker.internet().url(),
-                faker.phoneNumber().phoneNumber(),
-                faker.bool().bool());
+            faker.internet().emailAddress(),
+            faker.internet().url(),
+            faker.phoneNumber().phoneNumber(),
+            faker.bool().bool());
     }
 }

@@ -1,19 +1,22 @@
-package inno_x_clients.x_clients.helper;
+package api_inno_itog_project.x_clients.helper;
 
 import static io.restassured.RestAssured.given;
-
-import inno_x_clients.x_clients.model.AuthRequest;
-import inno_x_clients.x_clients.model.AuthResponse;
-import inno_x_clients.x_clients.model.Company;
-import inno_x_clients.x_clients.model.CreateCompanyRequest;
-import inno_x_clients.x_clients.model.CreateCompanyResponse;
+import api_inno_itog_project.x_clients.model.AuthRequest;
+import api_inno_itog_project.x_clients.model.AuthResponse;
+import api_inno_itog_project.x_clients.model.CreateCompanyRequest;
+import api_inno_itog_project.x_clients.model.CreateCompanyResponse;
+import helper.ConfProperties;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import java.util.Optional;
-
 
 public class CompanyApiHelper {
+    private static ConfProperties properties = new ConfProperties();
+    private String username = properties.getProperty("username");
+    private String password = properties.getProperty("password");
 
+
+    @Step("Авторизация")
     public AuthResponse auth(String username, String password) {
         AuthRequest authRequest = new AuthRequest(username, password);
 
@@ -25,17 +28,9 @@ public class CompanyApiHelper {
             .post()
             .as(AuthResponse.class);
     }
-
-    public void printCompanyInfo(int id) {
-        given()
-            .basePath("company")
-            .when()
-            .get("{companyId}", id)
-            .body().prettyPrint();
-    }
-
+    @Step("Создание компании")
     public Object createCompany(String name, String descr) {
-        AuthResponse info = auth("leonardo", "leads");
+        AuthResponse info = auth(username, password);
 
         CreateCompanyRequest createCompanyRequest = new CreateCompanyRequest(name, descr);
 
@@ -47,9 +42,9 @@ public class CompanyApiHelper {
             .when()
             .post().body().as(CreateCompanyResponse.class);
     }
-
+    @Step("Удаление компании")
     public Response deleteCompany(int id) {
-        AuthResponse info = auth("leonardo", "leads");
+        AuthResponse info = auth(username, password);
 
         return given()
             .basePath("company/delete")
@@ -59,33 +54,4 @@ public class CompanyApiHelper {
             .get("{id}", id);
 
     }
-
-    public Optional<Company> getById(int id) throws InterruptedException {
-        Thread.sleep(3000);
-        Response response = given()
-            .basePath("company")
-            .pathParam("id", id)
-            .when().get("/{id}");
-
-        String header = response.header("Content-Length");
-        if (header != null && header.equals("0")) {
-            return Optional.empty();
-        }
-
-        Company company = response.as(Company.class);
-        return Optional.of(company);
-    }
-    public int getCompanyId(String name, String descr) throws NullPointerException {
-        AuthResponse info = auth("leonardo", "leads");
-        CreateCompanyRequest createCompanyRequest = new CreateCompanyRequest(name, descr);
-
-            return given()
-                .basePath("company")
-                .body(createCompanyRequest)
-                .header("x-client-token", info.userToken())
-                .when()
-                .post().body().as(CreateCompanyResponse.class).id();
-        }
-
-
 }

@@ -7,12 +7,13 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import com.github.javafaker.Faker;
 import api_inno_itog_project.x_clients.ext.DatabaseService;
 import api_inno_itog_project.x_clients.helper.CompanyApiHelper;
-import api_inno_itog_project.x_clients.helper.ConfProperties;
+import helper.ConfProperties;
 import api_inno_itog_project.x_clients.helper.EmployeeApiHelper;
 import api_inno_itog_project.x_clients.model.AuthResponse;
 import api_inno_itog_project.x_clients.model.Employee;
 import api_inno_itog_project.x_clients.model.PatchEmployeeRequest;
 import io.qameta.allure.Epic;
+import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
@@ -27,7 +28,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-@Epic("")
+@Epic("Контрактные тесты на модуль Employee")
+@Owner("Smirnova G.")
 public class EmployeeContractTest {
 
     public static ConfProperties properties;
@@ -81,9 +83,7 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @Description("Ожидаем пустое тело по запросу списка работников по НЕ существующему id компании")
-    @DisplayName("")
-    @Tag("")
+    @DisplayName("Ожидаем пустое тело по запросу списка работников по НЕ существующему id компании")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void getBodyEmployeeByCompany() throws SQLException {
@@ -100,9 +100,7 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @Description("Ожидаем статус 200,при запросе сотрудника по его id")
-    @DisplayName("")
-    @Tag("")
+    @DisplayName("Ожидаем статус 200,при запросе сотрудника по его id")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeeById() throws SQLException {
@@ -119,9 +117,7 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @Description("Ожидаем статус 200 и Content-length=0, при получение сотрудника с несуществующем id")
-    @DisplayName("")
-    @Tag("")
+    @DisplayName("Ожидаем статус 200 и Content-length=0, при получение сотрудника с несуществующем id")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeerByInvalidId() throws SQLException {
@@ -138,9 +134,7 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @Description("Проверяем, что не  можем создать сотрудника без токеном, status-401")
-    @DisplayName("")
-    @Tag("")
+    @DisplayName("Проверяем, что не  можем создать сотрудника без токеном, status-401")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void iCannotAddNewEmployee() {
@@ -158,9 +152,7 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @Description("Проверяем что можем создать сотрудника c токеном")
-    @DisplayName("")
-    @Tag("")
+    @DisplayName("Проверяем что можем создать сотрудника c токеном")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanAddNewEmployee() {
@@ -181,9 +173,7 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @Description("Проверяем, что можем изменить информацию о сотруднике")
-    @DisplayName("")
-    @Tag("")
+    @DisplayName("Проверяем, что можем изменить информацию о сотруднике")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanEditEmployee() {
@@ -202,9 +192,7 @@ public class EmployeeContractTest {
     }
 
     @Test
-    @Description("Проверяем, что при отправке запросы на изменение несуществующего сотрудника получаем 500")
-    @DisplayName("")
-    @Tag("")
+    @DisplayName("Проверяем, что при отправке запросы на изменение несуществующего сотрудника получаем 500")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void iCannotEditEmployee() {
@@ -225,7 +213,6 @@ public class EmployeeContractTest {
 
     @Test
     @DisplayName("Получение списка сотрудников для компании")
-    @Tag("")
     @Story("")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeeCompany() {

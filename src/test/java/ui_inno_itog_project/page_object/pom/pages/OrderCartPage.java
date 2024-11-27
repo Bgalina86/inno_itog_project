@@ -31,10 +31,11 @@ public class OrderCartPage {
     }
     @Step("Нажимаем кнопку")
     public void clickButtonCheckoutLocation(){
-       orderCart.clickButtonCheckoutLocation();
+        orderCart.clickButtonCheckoutLocation();
     }
     @Step("Проверяем, что перешли на последнюю страницу")
     public String getTextFinishPage(){
         return orderCart.getFinishText();
     }
 }
+

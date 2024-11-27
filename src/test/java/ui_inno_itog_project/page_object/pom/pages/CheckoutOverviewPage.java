@@ -50,8 +50,8 @@ public class CheckoutOverviewPage {
     }
 
     @Step("Нажатие кнопки Chekout")
-    public void buttonFinishLocation() {
-        checkoutOverview.buttonFinishLocation();
+    public void clickButtonFinishLocation() {
+        checkoutOverview.clickButtonFinishLocation();
     }
 
 }
