@@ -1,10 +1,13 @@
 package ui_inno_itog_project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import ui_inno_itog_project.page_object.ext.MainPageResolver;
 import ui_inno_itog_project.page_object.ext.WebDriverShutter;
 import ui_inno_itog_project.page_object.pom.pages.MainPage;
 import io.qameta.allure.Epic;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -15,17 +18,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @DisplayName("Тесты по сайту https://www.saucedemo.com/")
-@Epic("Тесты по сайту https://www.saucedemo.com/")
 @Owner("Smirnova G.")
 @ExtendWith(MainPageResolver.class)
 @ExtendWith(WebDriverShutter.class)
 public class SaucedemoTests extends BaseTest {
 
     @Test
-    @DisplayName("Проверка авторизации пользователем,который зарегистрирован")
+    @Owner("Smirnova G.")
+    @Epic("Тест-кейс положительная авторизация")
+    @DisplayName("Блок авторизация")
     @Tag("positive")
-    @Story("Блок авторизация")
+    @Story("Проверка авторизации пользователем,который зарегистрирован")
     @Severity(SeverityLevel.BLOCKER)
+    @Link(url = "ссылка на постановку", name = "Наименование постановки")
+    @Issue("jira jp-123")
     public void authorizationStandardUser(MainPage mainPage) {
         mainPage.open();
         assertEquals("Swag Labs", mainPage.authorizationPage.getTextHeader());
@@ -37,10 +43,14 @@ public class SaucedemoTests extends BaseTest {
 
 
     @Test
-    @DisplayName("Проверка авторизации пользователем,который забыл пароль")
+    @Owner("Smirnova G.")
+    @Epic("Тест-кейс негативная авторизация")
+    @DisplayName("Блок авторизация")
     @Tag("negative ")
-    @Story("Блок авторизация")
+    @Story("Проверка авторизации пользователем,который забыл пароль")
     @Severity(SeverityLevel.BLOCKER)
+    @Link(url = "ссылка на постановку", name = "Наименование постановки")
+    @Issue("jira jp-123")
     public void authorizationError(MainPage mainPage) {
         mainPage.open();
         assertEquals("Swag Labs", mainPage.authorizationPage.getTextHeader());
@@ -53,10 +63,14 @@ public class SaucedemoTests extends BaseTest {
 
 
     @Test
+    @Owner("Smirnova G.")
+    @Epic("Тест-кейс end2end")
     @DisplayName("Пользовательский тест-кейс по покупке товара")
     @Tag("positive")
     @Story("Проверка авторизации пользователем,который зарегистрирован")
     @Severity(SeverityLevel.BLOCKER)
+    @Link(url = "ссылка на постановку", name = "Наименование постановки")
+    @Issue("jira jp-123")
     public void e2eLoginStandart(MainPage mainPage) {
         mainPage.open();
         assertEquals("Swag Labs", mainPage.authorizationPage.getTextHeader());
@@ -66,10 +80,14 @@ public class SaucedemoTests extends BaseTest {
 
 
     @Test
+    @Owner("Smirnova G.")
+    @Epic("Тест-кейс end2end")
     @DisplayName("Пользовательский тест-кейс по покупке товара с ожиданиями")
     @Tag("positive")
     @Story("Проверка авторизации пользователем,который зарегистрирован")
     @Severity(SeverityLevel.BLOCKER)
+    @Link(url = "ссылка на постановку", name = "Наименование постановки")
+    @Issue("jira jp-123")
     public void e2eUsernamePerformance(MainPage mainPage) {
         mainPage.open();
         assertEquals("Swag Labs", mainPage.authorizationPage.getTextHeader());

@@ -68,7 +68,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Получаем список работников по существующей компании")
     @Story("Список сотрудников")
-    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void getListEmployeeByCompany() throws SQLException {
         int id = databaseService.getAnyCompanyID();
@@ -85,7 +84,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Ожидаем пустое тело по запросу списка работников по НЕ существующему id компании")
     @Story("Получение информации о менеджерах")
-    @Tag("negative")
     @Severity(SeverityLevel.BLOCKER)
     public void getBodyEmployeeByCompany() throws SQLException {
         int id = databaseService.getLastCompanyID();
@@ -103,7 +101,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Ожидаем статус 200,при запросе сотрудника по его id")
     @Story("Список сотрудников")
-    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeeById() throws SQLException {
         int id = databaseService.getAnyEmployeeId();
@@ -121,7 +118,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Ожидаем статус 200 и Content-length=0, при получение сотрудника с несуществующем id")
     @Story("Список сотрудников")
-    @Tag("negative")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeerByInvalidId() throws SQLException {
 
@@ -139,7 +135,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Проверяем, что не  можем создать сотрудника без токена, status-401")
     @Story("Список сотрудников")
-    @Tag("negative")
     @Severity(SeverityLevel.BLOCKER)
     public void iCannotAddNewEmployee() {
         Faker faker = new Faker();
@@ -158,7 +153,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Проверяем что можем создать сотрудника c токеном")
     @Story("Список сотрудников")
-    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanAddNewEmployee() {
 
@@ -180,7 +174,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Проверяем, что можем изменить информацию о сотруднике")
     @Story("Редактирование информации о сотрудниках")
-    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanEditEmployee() {
         AuthResponse info = employeeApiHelper.auth(username, password);
@@ -200,7 +193,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Проверяем, что при отправке запросы на изменение несуществующего сотрудника получаем 500")
     @Story("Редактирование информации о сотрудниках")
-    @Tag("negative")
     @Severity(SeverityLevel.BLOCKER)
     public void iCannotEditEmployee() {
         AuthResponse info = employeeApiHelper.auth(username, password);
@@ -221,7 +213,6 @@ public class EmployeeContractTest {
     @Test
     @DisplayName("Получение списка сотрудников для компании")
     @Story("Список сотрудников")
-    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void getEmployeeCompany() {
         employeeApiHelper.printGetEmployeeIsCompany(companyId);
