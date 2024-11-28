@@ -14,6 +14,7 @@ import api_inno_itog_project.x_clients.model.CreateEmployeeResponse;
 import api_inno_itog_project.x_clients.model.Employee;
 import api_inno_itog_project.x_clients.model.PatchEmployeeRequest;
 import io.qameta.allure.Epic;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -24,10 +25,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import jdk.jfr.Description;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Бизнес тесты на модуль Employee")
@@ -75,6 +76,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Проверяем, что могу создать нового пользователя")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployee() throws SQLException {
         Faker faker = new Faker();
@@ -97,6 +99,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу создать нового пользователя.Имя записалось корректно")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployeeFirstName() throws SQLException {
         Faker faker = new Faker();
@@ -111,6 +114,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу создать нового пользователя. Фамилия записалась корректно")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployeeLastName() throws SQLException {
         Faker faker = new Faker();
@@ -125,6 +129,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу создать нового пользователя. Отчество записалось корректно")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanAddNewEmployeeMiddleName() throws SQLException {
         Faker faker = new Faker();
@@ -137,8 +142,10 @@ public class EmployeeBusinessTests {
     }
 
     @Test
+    @Issue("jira-123")
     @DisplayName("Могу создать нового пользователя. Email записан корректно")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeeEmail() throws SQLException {
         Faker faker = new Faker();
@@ -153,6 +160,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу создать нового пользователя. Телефон записан корректно")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeePhone() throws SQLException {
         Faker faker = new Faker();
@@ -168,6 +176,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу создать нового пользователя. День рождения записан корректно")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeeBirthdate() throws SQLException {
         Faker faker = new Faker();
@@ -182,6 +191,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу создать нового пользователя. IsActive записан корректно")
     @Story("Создание менеджера")
+    @Tag("positive")
     @Severity(SeverityLevel.CRITICAL)
     public void ICanAddNewEmployeeIsActive() throws SQLException {
         Faker faker = new Faker();
@@ -196,6 +206,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу получить информацию о пользователе")
     @Story("Получение информации о пользователе")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanGetEmployeeInfo() {
         Employee employee = employeeApiHelper.getEmployeeInfo(employeeId);
@@ -207,6 +218,7 @@ public class EmployeeBusinessTests {
     @Test
     @DisplayName("Могу получить список сотрудников по компании")
     @Story("Получение информации о пользователе")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void ICanGetEmployeeListByCompany() {
         List<Employee> employeeList = employeeApiHelper.getListOfEmployee(companyId);

@@ -5,7 +5,6 @@ import static api_inno_itog_project.constClass.ConstStatusCode.HTTP_CODE_OK;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
-
 import api_inno_itog_project.x_clients.helper.CompanyApiHelper;
 import helper.ConfProperties;
 import api_inno_itog_project.x_clients.model.AuthResponse;
@@ -22,6 +21,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Тесты на модуль Company")
@@ -52,6 +52,7 @@ public class CompanyTests {
     @Test
     @DisplayName("Могу отредактировать наименование компании и ее описание")
     @Story("Редактирование записи о компании")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanCreateNewCompany() {
         AuthResponse info = companyApiHelper.auth(username, password);
@@ -74,6 +75,7 @@ public class CompanyTests {
     @Test
     @DisplayName("Могу удалить компанию")
     @Story("Удаление компании")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void iCanDeleteCompany() {
         CreateCompanyResponse response = (CreateCompanyResponse) companyApiHelper.createCompany(
@@ -86,6 +88,7 @@ public class CompanyTests {
     @Test
     @DisplayName("Могу получить информацию по компании")
     @Story("Информация  компании")
+    @Tag("positive")
     @Severity(SeverityLevel.BLOCKER)
     public void getCompanyIdNewCompany() {
         AuthResponse info = companyApiHelper.auth(username, password);
