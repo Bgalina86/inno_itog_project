@@ -27,19 +27,19 @@
 ## Отчёт по прогону в Allure
 ### Suites
 
-![Suites](./src/test/resources/img/Allure report Suites.jpg)
+![Suites](./src/test/resources/img/Allure_report_Suites.jpg)
 
 ### Graphs
-![Graphs](./src/test/resources/img/Allure report Graphs.jpg)
+![Graphs](./src/test/resources/img/Allure_report_Graphs.jpg)
 
 ### Behaviors
-![Behaviors](./src/test/resources/img/Allure report Behaviors.jpg)
+![Behaviors](./src/test/resources/img/Allure_report_Behaviors.jpg)
 
 ### Test body
-![Allure report Test body](./src/test/resources/img/Allure report Test body.jpg)
+![Allure report Test body](./src/test/resources/img/Allure_report_Test_body.jpg)
 
 ### Failed
-![Allure report Failed](./src/test/resources/img/Allure report Failed.jpg)
+![Allure report Failed](./src/test/resources/img/Allure_report_Failed.jpg)
 
 ### Trend
-![Allure report Trend](./src/test/resources/img/Allure report Trend.jpg)
+![Allure report Trend](./src/test/resources/img/Allure_report_Trend.jpg)
