@@ -10,9 +10,8 @@
 1. UI - тесты
 2. API - тесты
 3. Команды для запуска тестов:
- - git clone -b main https://github.com/Bgalina86/inno_itog_project.git
- - в терминале набрать команду 
-    **mvn clean test**
+ - `git clone -b main https://github.com/Bgalina86/inno_itog_project.git`
+ - `mvn clean test`
 
 4. Команды для построения отчётности в Allure
  - **allure serve** - быстрое построение отчетов без сбора статистики по предыдущим запускам
