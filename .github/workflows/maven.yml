@@ -39,7 +39,7 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        ref: https://github.com/Bgalina86/inno_itog_project.git
+        ref: https://bgalina86.github.io/inno_itog_project/
         path: src/test/resources/Allure_report
 
     - name: Создавать отчет о тестировании
@@ -55,7 +55,7 @@ jobs:
       if: always()
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: https://github.com/Bgalina86/inno_itog_project.git
+          publish_branch: https://bgalina86.github.io/inno_itog_project/
           publish_dir: allure-results
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
