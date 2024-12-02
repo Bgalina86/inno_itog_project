@@ -32,7 +32,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run test
-      run: mvn clean test
+      run: ./gradlew clean test
 
     - name: Загружать историю отчетов о тестировании
       uses: actions/checkout@v3
@@ -47,8 +47,8 @@ jobs:
       if: always()
       with:
           gh_pages: gh-pages
-          allure_history: allure-report
-          allure_results: allure-results
+          allure_history: ./allure-results
+          allure_results: ./allure-results
 
     - name: Публиковать отчет о тестировании
       uses: peaceiris/actions-gh-pages@v3
