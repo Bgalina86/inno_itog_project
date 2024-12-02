@@ -93,7 +93,7 @@ public class EmployeeContractTest {
             .when()
             .get()
             .then()
-            .statusCode(HTTP_CODE_CREATE)
+            .statusCode(HTTP_CODE_OK)
             .header("Content-Type", "application/json; charset=utf-8")
             .body(equalTo("[]"));
     }
