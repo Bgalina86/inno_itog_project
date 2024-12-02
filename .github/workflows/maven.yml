@@ -39,14 +39,14 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        ref: https://bgalina86.github.io/inno_itog_project/
-        path: src/test/resources/Allure_report
+        ref: gh-pages
+        path: gh-pages
 
     - name: Создавать отчет о тестировании
       uses: simple-elf/allure-report-action@v1.7
       if: always()
       with:
-          gh_pages: src/test/resources/Allure_report
+          gh_pages: gh-pages
           allure_history: allure-report
           allure_results: allure-results
 
@@ -55,7 +55,7 @@ jobs:
       if: always()
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: https://bgalina86.github.io/inno_itog_project/
+          publish_branch: gh-pages
           publish_dir: allure-results
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
