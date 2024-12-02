@@ -13,19 +13,22 @@ on:
     branches: [ "main" ]
  
 jobs:
-  example_matrix:
-    strategy:
-      matrix:
-        version: [ '17', '21', '23' ]
+#  example_matrix:
+#    strategy:
+#      matrix:
+#        version: [ '17', '21', '23' ]
+  build:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK ${{ matrix.version }}
+#    - name: Set up JDK ${{ matrix.version }}
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: ${{ matrix.version }}
+#        java-version: ${{ matrix.version }}
+        java-version: '17'
         distribution: 'temurin'
         cache: maven
     - name: Run test
