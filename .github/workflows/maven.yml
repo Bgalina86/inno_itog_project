@@ -57,6 +57,7 @@ jobs:
 
       - name: Generate Allure Report
         run: |
+          mkdir -p allure-report
           allure generate --clean allure-results -o allure-report
           
 
@@ -72,10 +73,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-#on:
-#  push:
-#    branches: [ "main" ]
-#
+# Версия с запуском тестов на несколько версиях Java
 #jobs:
 ##  example_matrix:
 ##    strategy:
