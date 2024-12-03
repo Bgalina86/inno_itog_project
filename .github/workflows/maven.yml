@@ -1,0 +1,127 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Запуск АТ проекта inno_itog_project
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Install Allure
+        run: |
+          curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.zip
+          sudo apt-get install -y unzip
+          unzip allure.zip -d /opt/allure
+          sudo ln -s /opt/allure/allure-2.25.0/bin/allure /usr/bin/allure
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+
+      - name: Run Tests
+        run: |
+          mvn clean test
+
+      - name: List Allure Results Files
+        run: ls -R allure-results
+
+      - name: Generate Allure Report
+        run: |
+          allure generate --clean allure-results -o allure-report
+        continue-on-error: true
+
+      - name: List Allure Report Files Before Upload
+        run: ls -R allure-report
+
+      - name: Upload Allure Report as artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './allure-report'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+#on:
+#  push:
+#    branches: [ "main" ]
+#
+#jobs:
+##  example_matrix:
+##    strategy:
+##      matrix:
+##        version: [ '17', '21', '23' ]
+#  build:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - uses: actions/checkout@v4
+##    - name: Set up JDK ${{ matrix.version }}
+#    - name: Set up JDK 17
+#      uses: actions/setup-java@v4
+#      with:
+##        java-version: ${{ matrix.version }}
+#        java-version: '17'
+#        distribution: 'temurin'
+#        cache: maven
+#    - name: Run test
+#      run: mvn clean test
+#
+#    - name: Загружать историю отчетов о тестировании
+#      uses: actions/checkout@v3
+#      if: always()
+#      continue-on-error: true
+#      with:
+#        ref: gh-pages
+#        path: gh-pages
+#
+#    - name: Создавать отчет о тестировании
+#      uses: simple-elf/allure-report-action@v1.7
+#      if: always()
+#      with:
+#          gh_pages: gh-pages
+#          allure_history: ./allure-results
+#          allure_results: ./allure-results
+#
+#    - name: Публиковать отчет о тестировании
+#      uses: peaceiris/actions-gh-pages@v3
+#      if: always()
+#      with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          publish_branch: gh-pages
+#          publish_dir: allure-results
+
+    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+   # - name: Update dependency graph
+   #   uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
