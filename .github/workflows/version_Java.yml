@@ -1,0 +1,20 @@
+# Версия с запуском тестов на несколько версиях Java
+jobs:
+  example_matrix:
+    strategy:
+      matrix:
+        version: [ '17', '21', '23' ]
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK ${{ matrix.version }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ matrix.version }}
+        distribution: 'temurin'
+        cache: maven
+    - name: Run test
+      run: mvn clean test
