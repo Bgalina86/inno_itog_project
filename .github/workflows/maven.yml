@@ -9,7 +9,7 @@
 name: Запуск АТ проекта inno_itog_project
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 permissions:
   contents: write
