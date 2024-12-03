@@ -49,8 +49,7 @@ jobs:
 
 
       - name: Run Tests
-        run: |
-          mvn clean test
+        run: mvn clean test
 
       - name: List Allure Results Files
         run: ls -R allure-results
