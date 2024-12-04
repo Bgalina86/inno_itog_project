@@ -32,11 +32,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
       - name: Build with Maven
         run: mvn clean install
 
@@ -46,6 +41,11 @@ jobs:
           sudo apt-get install -y unzip
           unzip allure.zip -d /opt/allure
           sudo ln -s /opt/allure/allure-2.25.0/bin/allure /usr/bin/allure
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
       - name: Run Tests
         run: |

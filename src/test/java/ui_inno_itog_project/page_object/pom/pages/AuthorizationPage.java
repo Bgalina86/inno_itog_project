@@ -1,7 +1,6 @@
 package ui_inno_itog_project.page_object.pom.pages;
 
 import ui_inno_itog_project.BaseTest;
-
 import ui_inno_itog_project.page_object.pom.elements.Authorization;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;

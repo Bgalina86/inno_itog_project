@@ -41,7 +41,6 @@ public class SaucedemoTests extends BaseTest {
         assertEquals("Products", mainPage.cardsPage.getHeader());
     }
 
-
     @Test
     @Owner("Smirnova G.")
     @Epic("Тест-кейс негативная авторизация")
@@ -61,7 +60,6 @@ public class SaucedemoTests extends BaseTest {
             mainPage.authorizationPage.getErrorMessage());
     }
 
-
     @Test
     @Owner("Smirnova G.")
     @Epic("Тест-кейс end2end")
@@ -78,7 +76,6 @@ public class SaucedemoTests extends BaseTest {
         e2e(mainPage);
     }
 
-
     @Test
     @Owner("Smirnova G.")
     @Epic("Тест-кейс end2end")
@@ -94,7 +91,8 @@ public class SaucedemoTests extends BaseTest {
         mainPage.authorizationPage.getLoginUsernamePerformance();
         e2e(mainPage);
     }
-    private void e2e(MainPage mainPage){
+
+    private void e2e(MainPage mainPage) {
         mainPage.authorizationPage.getPassword();
         mainPage.authorizationPage.clikButtonLogin();
         assertEquals("Products", mainPage.cardsPage.getHeader());

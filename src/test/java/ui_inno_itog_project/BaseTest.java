@@ -1,4 +1,5 @@
 package ui_inno_itog_project;
+
 import helper.ConfProperties;
 import ui_inno_itog_project.page_object.pom.pages.AuthorizationPage;
 import ui_inno_itog_project.page_object.pom.pages.CardsPage;
@@ -14,8 +15,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-
 public class BaseTest {
+
     protected WebDriver driver;
     protected AuthorizationPage authorizationPage;
     protected CardsPage cardsPage;
@@ -31,7 +32,6 @@ public class BaseTest {
         options.setPageLoadStrategy(org.openqa.selenium.PageLoadStrategy.EAGER);
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         authorizationPage = new AuthorizationPage(driver);
         cardsPage = new CardsPage(driver);
         checkoutOverviewPage = new CheckoutOverviewPage(driver);

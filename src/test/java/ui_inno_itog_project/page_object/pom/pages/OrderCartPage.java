@@ -1,8 +1,11 @@
 package ui_inno_itog_project.page_object.pom.pages;
+
 import ui_inno_itog_project.page_object.pom.elements.OrderCart;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+
 public class OrderCartPage {
+
     private final WebDriver driver;
     private final OrderCart orderCart;
 
@@ -25,16 +28,19 @@ public class OrderCartPage {
     public String getnameCart3Location() {
         return orderCart.getNameCart3Location();
     }
+
     @Step("Получаем итоговую сумму по заказу")
-    public String getTotalPriceLocation(){
+    public String getTotalPriceLocation() {
         return orderCart.getTotalPriceLocation();
     }
+
     @Step("Нажимаем кнопку")
-    public void clickButtonCheckoutLocation(){
+    public void clickButtonCheckoutLocation() {
         orderCart.clickButtonCheckoutLocation();
     }
+
     @Step("Проверяем, что перешли на последнюю страницу")
-    public String getTextFinishPage(){
+    public String getTextFinishPage() {
         return orderCart.getFinishText();
     }
 }

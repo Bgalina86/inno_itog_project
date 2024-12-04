@@ -53,5 +53,4 @@ public class CheckoutOverviewPage {
     public void clickButtonFinishLocation() {
         checkoutOverview.clickButtonFinishLocation();
     }
-
 }

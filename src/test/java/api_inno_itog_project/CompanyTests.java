@@ -40,7 +40,7 @@ public class CompanyTests {
         companyApiHelper = new CompanyApiHelper();
     }
 
-   @BeforeAll
+    @BeforeAll
     public static void setUp() {
         properties = new ConfProperties();
         RestAssured.baseURI = properties.getProperty("baseURI");

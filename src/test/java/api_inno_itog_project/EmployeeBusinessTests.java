@@ -4,6 +4,7 @@ import static api_inno_itog_project.x_clients.helper.EmployeeRandomeService.gene
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.github.javafaker.Faker;
 import api_inno_itog_project.x_clients.ext.DatabaseService;
 import api_inno_itog_project.x_clients.ext.DbProperties;
@@ -25,12 +26,8 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import jdk.jfr.Description;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -141,7 +138,7 @@ public class EmployeeBusinessTests {
     }
 
     @Test
-   // @Disabled
+    // @Disabled
     @Issue("jira jp-123")
     @DisplayName("Могу создать нового пользователя. Email записан корректно")
     @Story("Создание менеджера")

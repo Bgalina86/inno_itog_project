@@ -4,6 +4,7 @@ import static api_inno_itog_project.constClass.ConstStatusCode.*;
 import static api_inno_itog_project.x_clients.helper.EmployeeRandomeService.generateEmployee;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
+
 import com.github.javafaker.Faker;
 import api_inno_itog_project.x_clients.ext.DatabaseService;
 import api_inno_itog_project.x_clients.helper.CompanyApiHelper;
@@ -24,7 +25,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Контрактные тесты на модуль Employee")

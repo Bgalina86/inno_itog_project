@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
 public class Card {
 
     private final By headerLocation = By.xpath("//div[@class='header_secondary_container']/span");

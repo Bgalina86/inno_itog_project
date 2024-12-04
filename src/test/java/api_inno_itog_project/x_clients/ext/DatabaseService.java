@@ -1,4 +1,5 @@
 package api_inno_itog_project.x_clients.ext;
+
 import helper.ConfProperties;
 import io.qameta.allure.Step;
 import java.sql.Connection;
@@ -26,36 +27,42 @@ public class DatabaseService {
     protected static String dbUsername;
     protected static String dbPassword;
     protected static String dbConnectionString;
+
     public static void setUp() {
         properties = new ConfProperties();
         dbUsername = properties.getProperty("dbUsername");
         dbPassword = properties.getProperty("dbPassword");
         dbConnectionString = properties.getProperty("dbConnectionString");
     }
+
     @Step("Подключение к базе данных")
     public void connectToDb() throws SQLException {
         connection = DriverManager.getConnection(ConfProperties.getProperty("dbConnectionString"),
             ConfProperties.getProperty("dbUsername"),
             ConfProperties.getProperty("dbPassword"));
     }
+
     @Step("Запрашиваем первую компанию из списка по companyId")
     public int getAnyCompanyID() throws SQLException {
         ResultSet resultSet = connection.createStatement().executeQuery(SQL_GET_ANY_COMPANY_ID);
         resultSet.next();
         return resultSet.getInt(1);
     }
+
     @Step("Запрашиваем companyId последней созданной компании")
     public int getLastCompanyID() throws SQLException {
         ResultSet resultSet = connection.createStatement().executeQuery(SQL_GET_LAST_COMPANY_ID);
         resultSet.next();
         return resultSet.getInt(1);
     }
+
     @Step("Запрашиваем employeeId последнего созданного менеджера в компании")
     public int getLastEmployeeID() throws SQLException {
         ResultSet resultSet = connection.createStatement().executeQuery(SQL_GET_LAST_EMPLOYEE_ID);
         resultSet.next();
         return resultSet.getInt(1);
     }
+
     @Step("Создаем компанию и получаем её companyId")
     public int createNewCompany() throws SQLException {
         connection.createStatement().executeUpdate(SQL_ADD_NEW_COMPANY);
@@ -64,10 +71,12 @@ public class DatabaseService {
         resultSet.getInt(1);
         return resultSet.getInt(1);
     }
+
     @Step("Закрываем соединение с базой данных")
     public void closeConnection() throws SQLException {
         connection.close();
     }
+
     @Step("Удаляем менеджеров из компании и потом удаляем компанию")
     public void deleteCompanyAndItsEmloyees(int companyId) throws SQLException {
         connection.createStatement().executeUpdate(SQL_DELETE_EMPLOYEES_OF_SPECIAL_COMPANY);
@@ -83,6 +92,7 @@ public class DatabaseService {
         resultSet.next();
         return resultSet.getInt(1);
     }
+
     @Step("Запрос информации о менеджере по его employeeId")
     public ResultSet getEmployeeInfo(int id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_GET_EMPLOYEE_INFO);
@@ -90,6 +100,7 @@ public class DatabaseService {
         ResultSet resultSet = statement.executeQuery();
         return resultSet;
     }
+
     @Step("Получаем первого менеджжера в списке")
     public int getAnyEmployeeId() throws SQLException {
         String sqlQuery = SQL_GET_ANY_EMPLOYEE_ID;

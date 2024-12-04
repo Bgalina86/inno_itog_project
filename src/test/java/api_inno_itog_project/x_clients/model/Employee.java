@@ -1,4 +1,5 @@
 package api_inno_itog_project.x_clients.model;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,4 +16,6 @@ public record Employee(int id,
                        String birthdate,
                        boolean isActive,
                        @JsonIgnore String createDateTime,
-                       @JsonIgnore String lastChangedDateTime) {}
+                       @JsonIgnore String lastChangedDateTime) {
+
+}
