@@ -141,7 +141,7 @@ public class EmployeeBusinessTests {
     }
 
     @Test
-    @Disabled
+   // @Disabled
     @Issue("jira jp-123")
     @DisplayName("Могу создать нового пользователя. Email записан корректно")
     @Story("Создание менеджера")
