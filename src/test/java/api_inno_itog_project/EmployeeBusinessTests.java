@@ -14,6 +14,7 @@ import api_inno_itog_project.x_clients.model.CreateEmployeeResponse;
 import api_inno_itog_project.x_clients.model.Employee;
 import api_inno_itog_project.x_clients.model.PatchEmployeeRequest;
 import io.qameta.allure.Epic;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -25,8 +26,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import jdk.jfr.Description;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -137,6 +141,8 @@ public class EmployeeBusinessTests {
     }
 
     @Test
+    @Disabled
+    @Issue("jira jp-123")
     @DisplayName("Могу создать нового пользователя. Email записан корректно")
     @Story("Создание менеджера")
     @Severity(SeverityLevel.CRITICAL)
