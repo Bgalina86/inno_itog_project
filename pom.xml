@@ -122,10 +122,7 @@
           <argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
-          <includes>
-            <include>src/test/java/ui_inno_itog_project/*.java</include>
-          </includes>
-         </configuration>
+          </configuration>
         <dependencies>
           <dependency>
             <groupId>org.aspectj</groupId>
